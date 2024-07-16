@@ -1,15 +1,15 @@
 import {config} from '@gluestack-ui/config';
 import {GluestackUIProvider} from '@gluestack-ui/themed';
+import {NavigationContainer} from '@react-navigation/native';
 import {MainNavigator} from '@src/navigators';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 function App() {
   return (
-    <SafeAreaProvider>
-      <GluestackUIProvider config={config}>
+    <GluestackUIProvider config={config}>
+      <NavigationContainer>
         <MainNavigator />
-      </GluestackUIProvider>
-    </SafeAreaProvider>
+      </NavigationContainer>
+    </GluestackUIProvider>
   );
 }
 
