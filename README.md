@@ -1,6 +1,6 @@
 # WeatherApp ⛅️
 
-This is an WeatherApp created with Expo Bare Workflow.
+This is an WeatherApp created React Native.
 
 ## Step 1: Start the Metro Server
 
