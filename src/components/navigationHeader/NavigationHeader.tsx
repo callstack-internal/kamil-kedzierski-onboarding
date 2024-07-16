@@ -8,7 +8,9 @@ interface NavigationHeaderProps {
 export const NavigationHeader: FC<NavigationHeaderProps> = ({children}) => {
   return (
     <SafeAreaView bgColor="$trueGray200">
-      <Box py="$2">{children}</Box>
+      <Box $ios-py="$2" $android-py="$4.5">
+        {children}
+      </Box>
     </SafeAreaView>
   );
 };
