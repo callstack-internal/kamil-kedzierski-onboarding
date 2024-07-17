@@ -1,9 +1,11 @@
-import {Text} from '@gluestack-ui/themed';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NavigationHeader} from '@src/components/navigationHeader';
 import {HomeScreen} from '@src/screens';
+import {WeatherDetailsScreen} from '@src/screens/weatherDetailsScreen';
+import {MainStackParamList} from '@src/types/navigation';
+import {HomeNavigationHeader} from '../customNavigationHeaders';
+import {WeatherDetailsHeader} from '../customNavigationHeaders/WeatherDetailsHeader';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<MainStackParamList>();
 
 export const MainNavigator = () => {
   return (
@@ -12,13 +14,14 @@ export const MainNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          header: () => (
-            <NavigationHeader>
-              <Text color="$black" bold size="2xl" textAlign="center">
-                Weather
-              </Text>
-            </NavigationHeader>
-          ),
+          header: HomeNavigationHeader,
+        }}
+      />
+      <Stack.Screen
+        name="WeatherDetails"
+        component={WeatherDetailsScreen}
+        options={{
+          header: WeatherDetailsHeader,
         }}
       />
     </Stack.Navigator>
