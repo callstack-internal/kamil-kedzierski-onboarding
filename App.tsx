@@ -2,7 +2,7 @@ import {config} from '@gluestack-ui/config';
 import {GluestackUIProvider, StatusBar} from '@gluestack-ui/themed';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {MainNavigator} from '@src/navigators';
-import {QueryClient, QueryClientProvider} from 'react-query';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 function App() {
   const queryClient = new QueryClient();

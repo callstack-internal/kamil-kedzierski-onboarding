@@ -1,6 +1,9 @@
 import {TemperatureUnit} from '@src/types';
-import {useQuery} from 'react-query';
+import {useQuery} from '@tanstack/react-query';
 import {fetchWeatherGroup} from '../fetchFunctions/fetchWeatherGroup';
 
 export const useGetWeatherGroup = (unit: TemperatureUnit) =>
-  useQuery('weatherGroup', () => fetchWeatherGroup(unit));
+  useQuery({
+    queryKey: ['weatherGroup'],
+    queryFn: () => fetchWeatherGroup(unit),
+  });
