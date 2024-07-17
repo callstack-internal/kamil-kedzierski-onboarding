@@ -21,7 +21,6 @@ describe('ListItem', () => {
   });
 
   it('calls onPress when pressed', () => {
-    const onPressMock = jest.fn();
     const {getByTestId} = render(
       <ListItem {...defaultProps} onPress={onPressMock} />,
     );
