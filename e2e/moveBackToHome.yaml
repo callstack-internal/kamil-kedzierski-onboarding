@@ -1,0 +1,4 @@
+appId: ${APP_ID}
+name: 'Move back to home'
+---
+- tapOn: 'Back'
