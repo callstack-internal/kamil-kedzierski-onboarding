@@ -16,11 +16,19 @@ export const WeatherDetailsScreen: FC<WeatherDetailsScreenProps> = ({
   route,
 }) => {
   const cityId = route.params.cityId;
-  const {data, isFetching} = useGetWeatherDetails(cityId);
+  const {data, isFetching, isError} = useGetWeatherDetails(cityId);
 
   if (isFetching) {
     return <Spinner />;
   }
+  if (isError && !data) {
+    return (
+      <SafeAreaView>
+        <Text>Failed to load weather details. Please try again later.</Text>
+      </SafeAreaView>
+    );
+  }
+
   if (!data) {
     return (
       <SafeAreaView>
