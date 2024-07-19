@@ -24,7 +24,7 @@ const fetchWeatherGroup = async (unit: TemperatureUnit = 'imperial') => {
   )}&appid=${Config.OPEN_WEATHER_API_KEY}&units=${unit}`;
 
   try {
-    const response = await axios.post<CitiesWeatherResponse>(url);
+    const response = await axios.get<CitiesWeatherResponse>(url);
 
     return response.data;
   } catch (error) {

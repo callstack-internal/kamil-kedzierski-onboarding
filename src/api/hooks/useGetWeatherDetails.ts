@@ -11,7 +11,7 @@ const fetchWeatherDetails = async (
   const url = `${Config.OPEN_WEATHER_BASE_URL}/weather?id=${cityId}&appid=${Config.OPEN_WEATHER_API_KEY}&units=${unit}`;
 
   try {
-    const response = await axios.post<CityWeather>(url);
+    const response = await axios.get<CityWeather>(url);
 
     return response.data;
   } catch (error) {
