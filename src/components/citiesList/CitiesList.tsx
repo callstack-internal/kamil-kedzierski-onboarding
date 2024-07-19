@@ -8,6 +8,7 @@ import {useState} from 'react';
 import {FlatList, ListRenderItem} from 'react-native';
 import {ListItem} from './parts/listItem';
 
+import {Text} from '@gluestack-ui/themed';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MainStackParamList} from '@src/types/navigation';
 
@@ -18,7 +19,9 @@ export const CitiesList = () => {
 
   const navigation =
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
-  const {data, isFetching, refetch} = useGetWeatherGroup(selectedTempUnit);
+
+  const {data, isFetching, refetch, isError} =
+    useGetWeatherGroup(selectedTempUnit);
 
   const handleNavigateToDetails = (cityId: string) => {
     navigation.navigate('WeatherDetails', {cityId});
@@ -36,6 +39,22 @@ export const CitiesList = () => {
 
   if (isFetching) {
     return <Spinner />;
+  }
+
+  if (isError) {
+    return (
+      <Text textAlign="center" mt="$10">
+        Failed to load. Please try again later.
+      </Text>
+    );
+  }
+
+  if (!data) {
+    return (
+      <Text textAlign="center" mt="$10">
+        No data
+      </Text>
+    );
   }
 
   return (

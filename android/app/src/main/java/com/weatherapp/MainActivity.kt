@@ -1,4 +1,4 @@
-package com.weatherapp
+package com.callstack.WeatherApp
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity

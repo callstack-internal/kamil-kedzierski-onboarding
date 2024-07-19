@@ -1,0 +1,6 @@
+appId: ${APP_ID}
+name: Enter weather detail screen
+---
+- tapOn:
+    id: 'ListItem-pressable'
+    index: 0

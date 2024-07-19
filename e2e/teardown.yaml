@@ -1,0 +1,4 @@
+appId: ${APP_ID}
+name: 'Kill the app and clean up'
+---
+- stopApp

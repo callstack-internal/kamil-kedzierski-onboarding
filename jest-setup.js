@@ -1,6 +1,15 @@
 import '@testing-library/react-native/extend-expect';
+import * as dotenv from 'dotenv';
 import 'react-native-gesture-handler/jestSetup';
 import {server} from './src/api/mocks/server';
+
+dotenv.config({path: '.env.test'});
+
+jest.mock('react-native-config', () => ({
+  OPEN_WEATHER_API_KEY: process.env.OPEN_WEATHER_API_KEY,
+  OPEN_WEATHER_BASE_URL: process.env.OPEN_WEATHER_BASE_URL,
+}));
+
 // include this section and the NativeAnimatedHelper section for mocking react-native-reanimated
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock');
