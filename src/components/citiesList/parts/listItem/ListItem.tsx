@@ -3,18 +3,16 @@ import {
   ChevronRightIcon,
   HStack,
   Icon,
-  Image,
   Pressable,
-  Text,
-  VStack,
 } from '@gluestack-ui/themed';
+import {WeatherInformationBox} from '@src/components/weatherInformationBox';
 import {getIconUrl} from '@src/utils';
 import {FC} from 'react';
 
 interface ListItemProps {
   cityName: string;
   weatherCondition: string;
-  temperature: string;
+  temperature: number;
   icon: string;
   onPress: () => void;
 }
@@ -31,26 +29,17 @@ export const ListItem: FC<ListItemProps> = ({
   //TODO: Implement some fancy effect when item is pressed
   return (
     <Pressable onPress={onPress} testID="ListItem-pressable">
-      <HStack alignItems="center" justifyContent="space-between" mr="$4">
-        <HStack alignItems="center">
-          <Image
-            source={{uri: iconUrl}}
-            size="sm"
-            alt="Weather condition icon"
-            testID="ListItem-icon"
+      <HStack alignItems="center" w="100%" justifyContent="space-between">
+        <Box flex={1}>
+          <WeatherInformationBox
+            iconUrl={iconUrl}
+            cityName={cityName}
+            temperature={temperature}
+            weatherCondition={weatherCondition}
           />
-          <VStack>
-            <Text fontWeight="$medium">{cityName}</Text>
-            <Text fontSize="$sm">{weatherCondition}</Text>
-          </VStack>
-        </HStack>
-        <HStack alignItems="center">
-          <Box backgroundColor="$info500" py="$1.5" px="$3" borderRadius="$2xl">
-            {/* TODO: Implement temperature unit selection */}
-            <Text color="$white">{temperature} °F</Text>
-          </Box>
-          <Icon as={ChevronRightIcon} size="xl" color="$trueGray600" ml="$2" />
-        </HStack>
+        </Box>
+
+        <Icon as={ChevronRightIcon} size="xl" color="$trueGray600" mr="$3" />
       </HStack>
     </Pressable>
   );

@@ -5,10 +5,11 @@ import {ListItem} from './ListItem';
 describe('ListItem', () => {
   const onPressMock = jest.fn();
 
+  //TODO I'll replace this with faker in the next PR
   const defaultProps = {
     cityName: 'Test City',
     weatherCondition: 'Sunny',
-    temperature: '75',
+    temperature: 75,
     icon: '10d',
     onPress: onPressMock,
   };
@@ -30,7 +31,7 @@ describe('ListItem', () => {
 
   it('displays the correct weather icon URI', () => {
     const utils = render(<ListItem {...defaultProps} />);
-    const image = utils.getByTestId('ListItem-icon');
+    const image = utils.getByTestId('WeatherInformationBox-icon');
     const iconUrl = getIconUrl(defaultProps.icon);
     expect(image.props.source.uri).toBe(iconUrl);
   });
