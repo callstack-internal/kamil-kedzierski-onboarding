@@ -34,7 +34,7 @@ jobs:
         run: yarn add react-native-cli
 
       - name: Install Dependencies
-        run: yarn bootstrap-no-pods
+        run: yarn
 
       - name: Setup Java environment
         uses: actions/setup-java@v3
@@ -59,14 +59,14 @@ jobs:
       - name: Run Android Emulator and app
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
+          api-level: 34
           arch: x86_64
           target: google_apis
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            yarn run-example-android
+            yarn android
             yarn test:e2e
 
   test-ios:
@@ -90,7 +90,7 @@ jobs:
 
       - uses: actions/cache@v2
         with:
-          path: example/ios/Pods
+          path: ios/Pods
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
@@ -118,7 +118,7 @@ jobs:
 
       - name: Build iOS App
         run: |
-          yarn run-example-ios
+          yarn run-ios-release
 
       - name: Run tests
         run: |
