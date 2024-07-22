@@ -13,18 +13,6 @@ public class LocationInfoModuleImpl: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
 
-    @objc public func getAppBuildNumber() -> String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown"
-    }
-
-    @objc public func getAppBundleId() -> String {
-        return Bundle.main.bundleIdentifier ?? "Unknown"
-    }
-
-    @objc public func getAppVersion() -> String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown"
-    }
-
     @objc public func getCurrentLocation(success: @escaping (CLLocation) -> Void, failure: @escaping (Error) -> Void) {
         hasCompletionBeenCalled = false
         locationFetchCompletion = { result in

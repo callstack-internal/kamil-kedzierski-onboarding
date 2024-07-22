@@ -1,7 +1,6 @@
 import {config} from '@gluestack-ui/config';
 import {GluestackUIProvider, StatusBar} from '@gluestack-ui/themed';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
-import {useAndroidLocationPermission} from '@src/hooks';
 import {MainNavigator} from '@src/navigators';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
@@ -15,7 +14,7 @@ function App() {
       background: config.tokens.colors.white,
     },
   };
-  useAndroidLocationPermission();
+
   return (
     <GluestackUIProvider config={config}>
       <StatusBar backgroundColor="$trueGray200" barStyle="dark-content" />

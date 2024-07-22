@@ -21,13 +21,6 @@ class LocationInfoModule(
     // Return the name of the module - it should match the name provided in JS specification
     override fun getName() = NAME
 
-    // Exported methods are overriden - based on the spec class
-    override fun getAppBuildNumber() = moduleImpl.getAppBuildNumber()
-
-    override fun getAppBundleId() = moduleImpl.getAppBundleId()
-
-    override fun getAppVersion() = moduleImpl.getAppVersion()
-
     override fun getCurrentLocation(promise: Promise) {
         moduleImpl.getCurrentLocation(promise)
     }

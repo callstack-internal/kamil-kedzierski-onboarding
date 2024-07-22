@@ -23,16 +23,6 @@ class LocationInfoModule(
     // Return the name of the module - it should match the name provided in JS specification
     override fun getName() = NAME
 
-    // Exported methods must be annotated with @ReactMethod decorator
-    @ReactMethod(isBlockingSynchronousMethod = true)
-    fun getAppBuildNumber() = moduleImpl.getAppBuildNumber()
-
-    @ReactMethod(isBlockingSynchronousMethod = true)
-    fun getAppBundleId() = moduleImpl.getAppBundleId()
-
-    @ReactMethod(isBlockingSynchronousMethod = true)
-    fun getAppVersion() = moduleImpl.getAppVersion()
-
     @ReactMethod
     fun getCurrentLocation(promise: Promise) {
         moduleImpl.getCurrentLocation(promise)

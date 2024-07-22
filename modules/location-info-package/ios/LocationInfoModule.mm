@@ -30,22 +30,6 @@
     LocationInfoModuleImpl *moduleImpl;
 }
 
-// Exported methods are overriden - based on the spec class
-RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getAppBuildNumber)
-{
-    return [moduleImpl getAppBuildNumber];
-}
-
-RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getAppBundleId)
-{
-    return [moduleImpl getAppBundleId];
-}
-
-RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getAppVersion)
-{
-    return [moduleImpl getAppVersion];
-}
-
 RCT_EXPORT_METHOD(getCurrentLocation:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   [moduleImpl getCurrentLocationWithSuccess:^(CLLocation *location) {
     NSDictionary *locationDict = @{@"latitude": @(location.coordinate.latitude),

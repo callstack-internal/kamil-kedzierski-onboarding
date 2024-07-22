@@ -14,7 +14,11 @@ import {MainStackParamList} from '@src/types/navigation';
 import {CurrentLocationWeatherBox} from '../currentLocationWeatherBox';
 
 export const CitiesList = () => {
-  const {data: currentLocation} = useGetCurrentLocationWeather();
+  const {
+    data: currentLocation,
+    isFetching: isCurrentLocationFetching,
+    refetch: refetchCurrentLocation,
+  } = useGetCurrentLocationWeather();
   //TODO: Implement Temp unit selection
   const [selectedTempUnit, setSelectedTempUnit] =
     useState<TemperatureUnit>('imperial');
@@ -22,13 +26,21 @@ export const CitiesList = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
 
-  const {data, isFetching, refetch, isError} =
-    useGetWeatherGroup(selectedTempUnit);
+  const {
+    data: weatherGroup,
+    isFetching: isWeatherGroupFetching,
+    refetch: refetchWeatherGroup,
+    isError,
+  } = useGetWeatherGroup(selectedTempUnit);
 
   const handleNavigateToDetails = (cityId: string) => {
     navigation.navigate('WeatherDetails', {cityId});
   };
 
+  const handleRefresh = () => {
+    refetchWeatherGroup();
+    refetchCurrentLocation();
+  };
   const renderItem: ListRenderItem<CityWeather> = ({item}) => (
     <ListItem
       cityName={item.name}
@@ -38,6 +50,8 @@ export const CitiesList = () => {
       onPress={() => handleNavigateToDetails(item.id.toString())}
     />
   );
+
+  const isFetching = isWeatherGroupFetching || isCurrentLocationFetching;
 
   if (isFetching) {
     return <Spinner />;
@@ -51,7 +65,7 @@ export const CitiesList = () => {
     );
   }
 
-  if (!data) {
+  if (!weatherGroup) {
     return (
       <Text textAlign="center" mt="$10">
         No data
@@ -61,12 +75,12 @@ export const CitiesList = () => {
 
   return (
     <FlatList
-      data={data?.list}
+      data={weatherGroup?.list}
       keyExtractor={(item: CityWeather) => item.id.toString()}
       renderItem={renderItem}
       ItemSeparatorComponent={Separator}
       ListFooterComponent={Separator}
-      onRefresh={refetch}
+      onRefresh={handleRefresh}
       refreshing={isFetching}
       ListHeaderComponent={
         <CurrentLocationWeatherBox

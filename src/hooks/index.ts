@@ -1,1 +1,1 @@
-export * from './useAndroidLocationPermission';
+export * from './useLocationPermission';

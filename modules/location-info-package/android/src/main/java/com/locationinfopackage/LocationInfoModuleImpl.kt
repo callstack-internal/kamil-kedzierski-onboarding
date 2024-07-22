@@ -1,9 +1,6 @@
 package com.locationinfopackage
 
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
-import android.os.Build
-
+import android.content.pm.PackageManager 
 import android.content.Context
 import android.location.Location
 import android.location.LocationManager
@@ -21,44 +18,6 @@ import android.util.Log
 class LocationInfoModuleImpl(
     private val reactContext: ReactApplicationContext
 ) {
-    fun getAppBuildNumber(): String {
-        var buildNumber = "unknown"
-        try {
-            buildNumber = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                getPackageInfo().longVersionCode.toString()
-            } else {
-                @Suppress("DEPRECATION")
-                getPackageInfo().versionCode.toString()
-            }
-        } catch (_: Exception) {}
-        return buildNumber
-    }
-
-    fun getAppBundleId() = reactContext.packageName as String
-
-    fun getAppVersion(): String {
-        var appVersion = "unknown"
-        try {
-            appVersion = getPackageInfo().versionName
-        } catch (_: Exception) {}
-        return appVersion
-    }
-
-    private fun getPackageInfo(): PackageInfo {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            reactContext
-                .packageManager
-                .getPackageInfo(
-                    reactContext.packageName,
-                    PackageManager.PackageInfoFlags.of(0L)
-                )
-        } else {
-            @Suppress("DEPRECATION")
-            reactContext
-                .packageManager
-                .getPackageInfo(reactContext.packageName, 0)
-        }
-    }
 
     fun getCurrentLocation(promise: Promise) {
         if (ContextCompat.checkSelfPermission(reactContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -73,7 +32,7 @@ class LocationInfoModuleImpl(
                     location = locationManager.getLastKnownLocation(provider)
                     if (location != null) break
                 } catch (e: SecurityException) {
-                    Log.e("LocationInfoModule", e)
+                    Log.e("LocationInfoModule", e.message ?: "Security exception without message")
                 }
             }
 

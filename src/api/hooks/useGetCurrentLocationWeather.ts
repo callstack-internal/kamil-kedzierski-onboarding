@@ -1,3 +1,4 @@
+import {PermissionStatus, useLocationPermission} from '@src/hooks';
 import {TemperatureUnit} from '@src/types';
 import {CityWeather} from '@src/types/api';
 import {useQuery} from '@tanstack/react-query';
@@ -8,7 +9,7 @@ import Config from 'react-native-config';
 const fetchLocation = async (unit: TemperatureUnit = 'imperial') => {
   try {
     const currentLocation = await LocationInfoModule.getCurrentLocation();
-    console.log('currentLocation', currentLocation);
+
     const url = `${Config.OPEN_WEATHER_BASE_URL}/weather?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&appid=${Config.OPEN_WEATHER_API_KEY}&units=${unit}`;
     const response = await axios.get<CityWeather>(url);
     return response.data;
@@ -24,8 +25,11 @@ const fetchLocation = async (unit: TemperatureUnit = 'imperial') => {
 export const useGetCurrentLocationWeather = (
   unit: TemperatureUnit = 'imperial',
 ) => {
+  const permissionStatus = useLocationPermission();
+
   return useQuery({
     queryKey: ['currentLocationWeather', unit],
     queryFn: () => fetchLocation(unit),
+    enabled: permissionStatus === PermissionStatus.GRANTED,
   });
 };
