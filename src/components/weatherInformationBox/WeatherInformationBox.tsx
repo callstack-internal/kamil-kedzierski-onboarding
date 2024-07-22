@@ -1,4 +1,5 @@
-import {Box, HStack, Image, Text, VStack} from '@gluestack-ui/themed';
+import {Box, HStack, Icon, Image, Text, VStack} from '@gluestack-ui/themed';
+import {MapPin} from 'lucide-react-native';
 import {FC} from 'react';
 
 interface WeatherInformationBoxProps {
@@ -6,6 +7,7 @@ interface WeatherInformationBoxProps {
   cityName: string;
   weatherCondition: string;
   temperature: number;
+  isCurrentLocation?: boolean;
 }
 
 export const WeatherInformationBox: FC<WeatherInformationBoxProps> = ({
@@ -13,6 +15,7 @@ export const WeatherInformationBox: FC<WeatherInformationBoxProps> = ({
   cityName,
   weatherCondition,
   temperature,
+  isCurrentLocation = false,
 }) => {
   return (
     <HStack alignItems="center" justifyContent="space-between" mr="$4">
@@ -24,7 +27,12 @@ export const WeatherInformationBox: FC<WeatherInformationBoxProps> = ({
           testID="WeatherInformationBox-icon"
         />
         <VStack>
-          <Text fontWeight="$medium">{cityName}</Text>
+          <HStack alignItems="center">
+            <Text fontWeight="$medium">{cityName}</Text>
+            {!!isCurrentLocation && (
+              <Icon as={MapPin} size="xs" color="$blue500" ml="$1" />
+            )}
+          </HStack>
           <Text fontSize="$sm">{weatherCondition}</Text>
         </VStack>
       </HStack>

@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useGetWeatherGroup} from '@src/api/hooks';
+import {useGetCurrentLocationWeather, useGetWeatherGroup} from '@src/api/hooks';
 import {Separator} from '@src/components/separator';
 import {Spinner} from '@src/components/spinner';
 import {TemperatureUnit} from '@src/types';
@@ -11,8 +11,10 @@ import {ListItem} from './parts/listItem';
 import {Text} from '@gluestack-ui/themed';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MainStackParamList} from '@src/types/navigation';
+import {CurrentLocationWeatherBox} from '../currentLocationWeatherBox';
 
 export const CitiesList = () => {
+  const {data: currentLocation} = useGetCurrentLocationWeather();
   //TODO: Implement Temp unit selection
   const [selectedTempUnit, setSelectedTempUnit] =
     useState<TemperatureUnit>('imperial');
@@ -66,6 +68,15 @@ export const CitiesList = () => {
       ListFooterComponent={Separator}
       onRefresh={refetch}
       refreshing={isFetching}
+      ListHeaderComponent={
+        <CurrentLocationWeatherBox
+          data={currentLocation}
+          onPress={() =>
+            currentLocation &&
+            handleNavigateToDetails(currentLocation?.id.toString())
+          }
+        />
+      }
     />
   );
 };
