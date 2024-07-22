@@ -118,7 +118,7 @@ jobs:
 
       - name: Build iOS App
         run: |
-          yarn run-ios-release
+          yarn run-ios
 
       - name: Run tests
         run: |

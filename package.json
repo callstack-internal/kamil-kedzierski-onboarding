@@ -11,7 +11,8 @@
     "test:e2e": "cd ./e2e && maestro test -e APP_ID=com.callstack.WeatherApp mainFlow.yaml",
     "codegen:android": "./android/gradlew -p android generateCodegenArtifactsFromSchema",
     "codegen:ios": "node node_modules/react-native/scripts/generate-codegen-artifacts.js --path . --targetPlatform ios --outputPath ./ios",
-    "run-ios-release": "react-native run-ios --configuration Release --simulator \"iPhone 15\"",
+    "run-ios-release": "react-native run-ios --mode=Release --simulator \"iPhone 15\"",
+    "run-android-release": "react-native run-android --mode=Release --active-arch-only",
     "bootstrap": "yarn && npx pod-install --quiet"
   },
   "dependencies": {
