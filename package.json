@@ -10,7 +10,9 @@
     "test": "jest",
     "test:e2e": "cd ./e2e && maestro test -e APP_ID=com.callstack.WeatherApp mainFlow.yaml",
     "codegen:android": "./android/gradlew -p android generateCodegenArtifactsFromSchema",
-    "codegen:ios": "node node_modules/react-native/scripts/generate-codegen-artifacts.js --path . --targetPlatform ios --outputPath ./ios"
+    "codegen:ios": "node node_modules/react-native/scripts/generate-codegen-artifacts.js --path . --targetPlatform ios --outputPath ./ios",
+    "run-example-ios": "cd example;react-native run-ios --configuration Release --simulator \"iPhone 15\"",
+    "run-example-android": "cd example;react-native run-android --variant=release"
   },
   "dependencies": {
     "@gluestack-style/react": "^1.0.57",
