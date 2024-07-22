@@ -66,7 +66,7 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            yarn android
+            yarn run-android-release
             yarn test:e2e
 
   test-ios:
@@ -118,7 +118,7 @@ jobs:
 
       - name: Build iOS App
         run: |
-          yarn run-ios
+          yarn run-ios-release
 
       - name: Run tests
         run: |
