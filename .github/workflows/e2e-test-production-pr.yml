@@ -31,9 +31,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install React Native CLI
-        run: |
-          yarn global add react-native-cli
-          echo "::add-path::$(yarn global bin)"
+        run: yarn global react-native-cli
 
       - name: Install Dependencies
         run: yarn bootstrap-no-pods
@@ -104,9 +102,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install React Native CLI
-        run: |
-          yarn global add react-native-cli
-          echo "::add-path::$(yarn global bin)"
+        run: yarn global add react-native-cli
 
       - name: Install Dependencies
         run: yarn bootstrap
