@@ -14,6 +14,7 @@ function App() {
       background: config.tokens.colors.white,
     },
   };
+
   return (
     <GluestackUIProvider config={config}>
       <StatusBar backgroundColor="$trueGray200" barStyle="dark-content" />
