@@ -9,6 +9,20 @@ import {
 
 const citiesWeatherResponseData = generateMockCitiesWeatherResponse();
 
+jest.mock('@src/api/hooks', () => ({
+  ...jest.requireActual('@src/api/hooks'),
+  useGetCurrentLocationWeather: () => ({
+    data: {
+      id: 123,
+      name: 'Test City',
+      weather: [{main: 'Cloudy', icon: '03d'}],
+      main: {temp: 20},
+    },
+    isFetching: false,
+    refetch: jest.fn(),
+  }),
+}));
+
 const mockNavigate = jest.fn();
 jest.mock('@react-navigation/native', () => {
   const actualNav = jest.requireActual('@react-navigation/native');
@@ -46,6 +60,13 @@ describe('CitiesList', () => {
           cityId: citiesWeatherResponseData.list[0].id.toString(),
         }),
       );
+    });
+    it('renders current location weather correctly', async () => {
+      const utils = render(<CitiesList />);
+
+      // Adjust these to match the mock data you provided
+      expect(await utils.findByText('Test City')).toBeTruthy();
+      expect(await utils.findByText('20 °F')).toBeTruthy(); // Assuming you display the temperature
     });
   });
 
