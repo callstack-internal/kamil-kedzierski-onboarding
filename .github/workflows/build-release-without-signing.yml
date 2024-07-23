@@ -55,6 +55,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - name: Cache Ruby dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
       - name: Install dependencies
         run: yarn
 
@@ -64,14 +73,11 @@ jobs:
           ruby-version: 3.3.4
           bundler: 2.5.11
 
-      - name: Cache Ruby dependencies
-        uses: actions/cache@v3
+      - name: Setup Java environment
+        uses: actions/setup-java@v3
         with:
-          path: |
-            vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
+          distribution: 'zulu'
+          java-version: '17'
 
       - name: Install dependencies
         run: |
