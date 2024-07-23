@@ -1,0 +1,25 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Build the iOS app for simulator"
+  lane :build do |options|
+    scheme = options[:scheme] || ENV['APP_SCHEME'] || "WeatherApp"
+    
+    # Pre-build checks
+    UI.user_error!("Scheme is not specified") unless scheme
+
+    
+    gym(
+      scheme: scheme,
+      export_method: "development",
+      skip_package_ipa: true,
+      destination: "generic/platform=iOS Simulator",
+      skip_codesigning: true
+    )
+    
+    UI.success("Build completed successfully 🚀")
+  rescue => e
+    UI.error("Failed to build the app: #{e}")
+    raise e
+  end
+end

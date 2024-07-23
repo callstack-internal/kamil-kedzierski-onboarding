@@ -13,7 +13,9 @@
     "codegen:ios": "node node_modules/react-native/scripts/generate-codegen-artifacts.js --path . --targetPlatform ios --outputPath ./ios",
     "run-ios-release": "react-native run-ios --mode=Release --simulator \"iPhone 15\"",
     "run-android-release": "react-native run-android --mode=Release --active-arch-only",
-    "bootstrap": "yarn && npx pod-install --quiet"
+    "bootstrap": "yarn && npx pod-install --quiet",
+    "fastlane:build:ios": "cd ./ios && bundle exec fastlane ios build",
+    "fastlane:build:android": "cd ./android && bundle exec fastlane android build"
   },
   "dependencies": {
     "@gluestack-style/react": "^1.0.57",
