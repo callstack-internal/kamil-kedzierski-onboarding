@@ -1,0 +1,37 @@
+{
+  "private": true,
+  "name": "location-info-package",
+  "version": "0.0.1",
+  "description": "Best location package ever made",
+  "react-native": "src",
+  "source": "src",
+  "main": "src",
+  "module": "src",
+  "files": [
+    "src",
+    "android",
+    "ios",
+    "LocationInfoPackage.podspec",
+    "!android/build",
+    "!ios/build",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
+  ],
+  "repository": "<repository-url>",
+  "author": "kamil.kedzierski@callstack.com",
+  "license": "MIT",
+  "homepage": "<homepage-url>",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "codegenConfig": {
+    "name": "LocationInfoPackage",
+    "type": "all",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.locationinfo"
+    }
+  }
+}

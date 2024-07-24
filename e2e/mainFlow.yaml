@@ -1,0 +1,6 @@
+appId: ${APP_ID}
+---
+- runFlow: 'setup.yaml'
+- runFlow: 'enterWeatherDetailScreen.yaml'
+- runFlow: 'moveBackToHome.yaml'
+- runFlow: 'teardown.yaml'

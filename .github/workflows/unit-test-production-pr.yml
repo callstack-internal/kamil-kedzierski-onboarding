@@ -1,0 +1,42 @@
+name: Unit Test - Main PR
+
+on:
+  pull_request:
+    branches: ['main']
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: 'Create .env.test file'
+        run: |
+          touch .env.test
+          echo OPEN_WEATHER_API_KEY=${{ secrets.OPEN_WEATHER_API_KEY }} >> .env.test
+          echo OPEN_WEATHER_BASE_URL=${{ secrets.OPEN_WEATHER_BASE_URL }} >> .env.test
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          cache: 'yarn'
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+            !**/node_modules/.cache
+            **/yarn.lock
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run unit tests
+        run: yarn test
